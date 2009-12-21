@@ -26,7 +26,7 @@ Author URI: http://www.aldentorres.com/
 //add lightsocial custom style
 function lightsocial_stylesheet()
 {
-	echo '<link rel="stylesheet" href="'. get_bloginfo('wpurl') . '/wp-content/plugins/lightsocial/lightsocial.css" type="text/css" media="screen" />';
+	echo '<link rel="stylesheet" href="'. get_bloginfo('wpurl') . '/wp-content/plugins/light-social/lightsocial.css" type="text/css" media="screen" />';
 }
 
 function code_digg($title, $link, $img_prefix)
@@ -169,7 +169,7 @@ function lightsocial_insert($content)
 	$title = trim(urlencode($post->post_title)); // get post title
 	$link = split('#', $postlink); //split the link with '#', for comment
 	$link = urlencode($link[0]);
-	$img_prefix = get_bloginfo('wpurl') . '/wp-content/plugins/lightsocial/';
+	$img_prefix = get_bloginfo('wpurl') . '/wp-content/plugins/light-social/';
 
 	$code = '';
 
