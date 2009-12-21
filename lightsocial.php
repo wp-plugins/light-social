@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://www.aldentorres.com/lightsocial-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.0
+Version: 1.1
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
