@@ -1,0 +1,14 @@
+.lightsocial_container
+{
+	margin-top: 10px;
+	margin-bottom: 35px;
+	position: relative;
+}
+
+.lightsocial_element
+{
+	margin-left: 4px;
+	margin-right: 4px;
+	display: inline;
+	float: left;
+}
