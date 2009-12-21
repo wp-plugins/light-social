@@ -47,7 +47,7 @@ No, simply activate or deactivate the plugin.
 
 == Changelog ==
 
-= 1.0 =
+= 1.1 =
 * Minor fix (added dash character for name changes).
 
 = 1.0 =
