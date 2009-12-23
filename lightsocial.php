@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://www.aldentorres.com/lightsocial-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.1
+Version: 1.2
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -27,6 +27,9 @@ Author URI: http://www.aldentorres.com/
 function lightsocial_stylesheet()
 {
 	echo '<link rel="stylesheet" href="'. get_bloginfo('wpurl') . '/wp-content/plugins/light-social/lightsocial.css" type="text/css" media="screen" />';
+	echo '<!--[if lt IE 7]>';
+	echo '<script defer type="text/javascript" src="'. get_bloginfo('wpurl') . '/wp-content/plugins/light-social/pngfix.js"></script>';
+	echo '<![endif]-->';
 }
 
 function code_digg($title, $link, $img_prefix)
@@ -35,7 +38,7 @@ function code_digg($title, $link, $img_prefix)
 
 	$code .= '<div class="lightsocial_element">';
 	$code .= '<a href="http://digg.com/submit?url='.$link.'&amp;title='.$title.'">';
-	$code .= '<img src="'.$img_prefix.'digg.ico" alt="Digg This" title="Digg This" />';
+	$code .= '<img src="'.$img_prefix.'digg.png" alt="Digg This" title="Digg This" />';
 	$code .= '</a>';
 	$code .= '</div>';
 
@@ -44,119 +47,132 @@ function code_digg($title, $link, $img_prefix)
 
 function code_reddit($title, $link, $img_prefix)
 {
-        $code = '';
+	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
 	$code .= '<a href="http://www.reddit.com/submit?url='.$link.'&amp;title='.$title.'">';
-        $code .= '<img src="'.$img_prefix.'reddit.ico" alt="Reddit This" title="Reddit This" />';
-        $code .= '</a>';
+	$code .= '<img src="'.$img_prefix.'reddit.png" alt="Reddit This" title="Reddit This" />';
+	$code .= '</a>';
 	$code .= '</div>';
 
-        return $code;
+	return $code;
+}
+
+function code_stumbleupon($title, $link, $img_prefix)
+{
+	$code = '';
+
+	$code .= '<div class="lightsocial_element">';
+	$code .= '<a href="http://www.stumbleupon.com/submit?url='.$link.'&amp;title='.$title.'">';
+	$code .= '<img src="'.$img_prefix.'stumbleupon.png" alt="Stumble Now!" title="Stumble Now!" />';
+	$code .= '</a>';
+	$code .= '</div>';
+
+	return $code;
 }
 
 function code_yahoo_buzz($title, $link, $img_prefix)
 {
-        $code = '';
+	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
 	$code .= '<a href="http://buzz.yahoo.com/buzz?targetUrl='.$link.'&amp;headline='.$title.'">';
-        $code .= '<img src="'.$img_prefix.'yahoo_buzz.ico" alt="Buzz This" title="Buzz This" />';
-        $code .= '</a>';
+	$code .= '<img src="'.$img_prefix.'yahoo_buzz.png" alt="Buzz This" title="Buzz This" />';
+	$code .= '</a>';
 	$code .= '</div>';
 
-        return $code;
+	return $code;
 }
 
 function code_dzone($title, $link, $img_prefix)
 {
-        $code = '';
+	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
-        $code .= '<a href="http://www.dzone.com/links/add.html?title='.$title.'&amp;url='.$link.'">';
-        $code .= '<img src="'.$img_prefix.'dzone.ico" alt="Vote on DZone" title="Vote on DZone" />';
-        $code .= '</a>';
+	$code .= '<a href="http://www.dzone.com/links/add.html?title='.$title.'&amp;url='.$link.'">';
+	$code .= '<img src="'.$img_prefix.'dzone.png" alt="Vote on DZone" title="Vote on DZone" />';
+	$code .= '</a>';
 	$code .= '</div>';
 
-        return $code;
+	return $code;
 }
 
 function code_facebook($title, $link, $img_prefix)
 {
-        $code = '';
+	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
-        $code .= '<a href="http://www.facebook.com/sharer.php?t='.$title.'&amp;u='.$link.'">';
-        $code .= '<img src="'.$img_prefix.'facebook.ico" alt="Share on a Facebook" title="Share on a Facebook" />';
-        $code .= '</a>';
+	$code .= '<a href="http://www.facebook.com/sharer.php?t='.$title.'&amp;u='.$link.'">';
+	$code .= '<img src="'.$img_prefix.'facebook.png" alt="Share on a Facebook" title="Share on a Facebook" />';
+	$code .= '</a>';
 	$code .= '</div>';
 
-        return $code;
+	return $code;
 }
 
 function code_delicious($title, $link, $img_prefix)
 {
-        $code = '';
+	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
-        $code .= '<a href="http://delicious.com/save?title='.$title.'&amp;url='.$link.'">';
-        $code .= '<img src="'.$img_prefix.'delicious.ico" alt="Bookmark this on Delicious" title="Bookmark this on Delicious" />';
-        $code .= '</a>';
+	$code .= '<a href="http://delicious.com/save?title='.$title.'&amp;url='.$link.'">';
+	$code .= '<img src="'.$img_prefix.'delicious.png" alt="Bookmark this on Delicious" title="Bookmark this on Delicious" />';
+	$code .= '</a>';
 	$code .= '</div>';
 
-        return $code;
+	return $code;
 }
 
 function code_dotnetkicks($title, $link, $img_prefix)
 {
-        $code = '';
+	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
 	$code .= '<a href="http://www.dotnetkicks.com/kick/?title='.$title.'&amp;url='.$link.'">';
-	$code .= '<img src="'.$img_prefix.'dotnetkicks.ico" alt="Kick It on DotNetKicks.com" title="Kick It on DotNetKicks.com" />';
+	$code .= '<img src="'.$img_prefix.'dotnetkicks.png" alt="Kick It on DotNetKicks.com" title="Kick It on DotNetKicks.com" />';
 	$code .= '</a>';
 	$code .= '</div>';
 
-        return $code;
+	return $code;
 }
 
 function code_linkedin($title, $link, $img_prefix)
 {
-        $code = '';
+	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
-        $code .= '<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url='.$link.'&amp;title='.$title.'&amp;summary=&amp;source=">';
-        $code .= '<img src="'.$img_prefix.'linkedin.ico" alt="Share on LinkedIn" title="Share on LinkedIn" />';
-        $code .= '</a>';
+	$code .= '<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url='.$link.'&amp;title='.$title.'&amp;summary=&amp;source=">';
+	$code .= '<img src="'.$img_prefix.'linkedin.png" alt="Share on LinkedIn" title="Share on LinkedIn" />';
+	$code .= '</a>';
 	$code .= '</div>';
 
-        return $code;
+	return $code;
 }
 
 function code_technorati($title, $link, $img_prefix)
 {
-        $code = '';
+	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
-        $code .= '<a href="http://www.technorati.com/faves?add='.$link.'">';
-        $code .= '<img src="'.$img_prefix.'technorati.ico" alt="Bookmark this on Technorati" title="Bookmark this on Technorati" />';
-        $code .= '</a>';
+	$code .= '<a href="http://www.technorati.com/faves?add='.$link.'">';
+	$code .= '<img src="'.$img_prefix.'technorati.png" alt="Bookmark this on Technorati" title="Bookmark this on Technorati" />';
+	$code .= '</a>';
 	$code .= '</div>';
 
-        return $code;
+	return $code;
 }
 
 function code_twitter($title, $link, $img_prefix)
 {
-        $code = '';
+	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
-        $code .= '<a href="http://twitter.com/home?status='.urlencode('Reading '.urldecode($link)).'">';
-        $code .= '<img src="'.$img_prefix.'twitter.ico" alt="Post on Twitter" title="Post on Twitter" />';
-        $code .= '</a>';
+	$code .= '<a href="http://twitter.com/home?status='.urlencode('Reading '.urldecode($link)).'">';
+	$code .= '<img src="'.$img_prefix.'twitter.png" alt="Post on Twitter" title="Post on Twitter" />';
+	$code .= '</a>';
 	$code .= '</div>';
 
-        return $code;
+	return $code;
 }
 
 //insert lightsocial custom html
@@ -173,7 +189,7 @@ function lightsocial_insert($content)
 
 	$code = '';
 
-	$display = true;
+	$display = true; // if you want to put some special condition
 
 	if ($display)
 	{
@@ -184,6 +200,9 @@ function lightsocial_insert($content)
 
 		//reddit
 		$code .= code_reddit($title, $link, $img_prefix);
+		
+		//stumbleupon
+		$code .= code_stumbleupon($title, $link, $img_prefix);
 
 		//yahoo buzz
 		$code .= code_yahoo_buzz($title, $link, $img_prefix);
@@ -192,22 +211,22 @@ function lightsocial_insert($content)
 		$code .= code_dzone($title, $link, $img_prefix);
 
 		//facebook
-                $code .= code_facebook($title, $link, $img_prefix);
+		$code .= code_facebook($title, $link, $img_prefix);
 
 		//facebook
-                $code .= code_delicious($title, $link, $img_prefix);
+		$code .= code_delicious($title, $link, $img_prefix);
 
 		//dotnetkicks
 		$code .= code_dotnetkicks($title, $link, $img_prefix);
 
 		//linkedin
-                $code .= code_linkedin($title, $link, $img_prefix);
+		$code .= code_linkedin($title, $link, $img_prefix);
 
 		//technorati
-                $code .= code_technorati($title, $link, $img_prefix);
+		$code .= code_technorati($title, $link, $img_prefix);
 
 		//twitter
-                $code .= code_twitter($title, $link, $img_prefix);
+		$code .= code_twitter($title, $link, $img_prefix);
 
 		$code .= '</div>';
 	}

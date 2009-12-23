@@ -17,6 +17,7 @@ This is the list of used social sites:
 
 *   Digg
 *   Reddit
+*   StumbleUpon
 *   Yahoo Buzz
 *   DZone
 *   Facebook
@@ -46,6 +47,11 @@ No, simply activate or deactivate the plugin.
 == Screenshots ==
 
 == Changelog ==
+
+= 1.2 =
+* Added StumbleUpon social site.
+* New icons (now PNG).
+* Fix for transparent png in IE6.
 
 = 1.1 =
 * Minor fix (added dash character for name changes).
