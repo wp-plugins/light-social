@@ -3,7 +3,7 @@ Contributors: aldenml
 Tags: bookmark, bookmarking, bookmarks, digg, reddit, yahoo buzz, dzone, facebook, delicious, dotnetkicks, linkedin, technorati, twitter
 Requires at least: 2.8.6
 Tested up to: 2.9
-Stable tag: 1.1
+Stable tag: 1.2
 
 This is a super lightweight plugin to insert a set of social share links at the bottom of each post, focused on technical blogs.
 
