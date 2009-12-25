@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: Light Social
-Plugin URI: http://www.aldentorres.com/lightsocial-wordpress-plugin/
+Plugin URI: http://www.aldentorres.com/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.2
+Version: 1.3
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -23,168 +23,143 @@ Author URI: http://www.aldentorres.com/
     along with this program; if not, see <http://www.gnu.org/licenses/>.
 */
 
-//add lightsocial custom style
+// add Light Social custom style
 function lightsocial_stylesheet()
 {
-	echo '<link rel="stylesheet" href="'. get_bloginfo('wpurl') . '/wp-content/plugins/light-social/lightsocial.css" type="text/css" media="screen" />';
+	$prefix = get_bloginfo('wpurl') . '/wp-content/plugins/light-social/';
+
+	echo '<link rel="stylesheet" href="'.$prefix.'lightsocial.css" type="text/css" media="screen" />';
+
+	// this is a fix hack for transparent png support in IE6
 	echo '<!--[if lt IE 7]>';
-	echo '<script defer type="text/javascript" src="'. get_bloginfo('wpurl') . '/wp-content/plugins/light-social/pngfix.js"></script>';
+	echo '<script defer type="text/javascript" src="'.$prefix. 'pngfix.js"></script>';
 	echo '<![endif]-->';
+}
+
+// this is a helper function to refactor common code
+function code_helper($href, $img, $tooltip)
+{
+	$code = '';
+
+	$code .= '<div class="lightsocial_element">';
+	$code .= '<a href="'.$href.'">';
+	$code .= '<img src="'.$img.'" alt="'.$tooltip.'" title="'.$tooltip.'" />';
+	$code .= '</a>';
+	$code .= '</div>';
+
+	return $code;
 }
 
 function code_digg($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://digg.com/submit?url='.$link.'&amp;title='.$title;
+	$img     = $img_prefix.'digg.png';
+	$tooltip = 'Digg This';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://digg.com/submit?url='.$link.'&amp;title='.$title.'">';
-	$code .= '<img src="'.$img_prefix.'digg.png" alt="Digg This" title="Digg This" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_reddit($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://www.reddit.com/submit?url='.$link.'&amp;title='.$title;
+	$img     = $img_prefix.'reddit.png';
+	$tooltip = 'Reddit This';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://www.reddit.com/submit?url='.$link.'&amp;title='.$title.'">';
-	$code .= '<img src="'.$img_prefix.'reddit.png" alt="Reddit This" title="Reddit This" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_stumbleupon($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://www.stumbleupon.com/submit?url='.$link.'&amp;title='.$title;
+	$img     = $img_prefix.'stumbleupon.png';
+	$tooltip = 'Stumble Now!';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://www.stumbleupon.com/submit?url='.$link.'&amp;title='.$title.'">';
-	$code .= '<img src="'.$img_prefix.'stumbleupon.png" alt="Stumble Now!" title="Stumble Now!" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_yahoo_buzz($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://buzz.yahoo.com/buzz?targetUrl='.$link.'&amp;headline='.$title;
+	$img     = $img_prefix.'yahoo_buzz.png';
+	$tooltip = 'Buzz This';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://buzz.yahoo.com/buzz?targetUrl='.$link.'&amp;headline='.$title.'">';
-	$code .= '<img src="'.$img_prefix.'yahoo_buzz.png" alt="Buzz This" title="Buzz This" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_dzone($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://www.dzone.com/links/add.html?title='.$title.'&amp;url='.$link;
+	$img     = $img_prefix.'dzone.png';
+	$tooltip = 'Vote on DZone';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://www.dzone.com/links/add.html?title='.$title.'&amp;url='.$link.'">';
-	$code .= '<img src="'.$img_prefix.'dzone.png" alt="Vote on DZone" title="Vote on DZone" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_facebook($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://www.facebook.com/sharer.php?t='.$title.'&amp;u='.$link;
+	$img     = $img_prefix.'facebook.png';
+	$tooltip = 'Share on Facebook';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://www.facebook.com/sharer.php?t='.$title.'&amp;u='.$link.'">';
-	$code .= '<img src="'.$img_prefix.'facebook.png" alt="Share on a Facebook" title="Share on a Facebook" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_delicious($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://delicious.com/save?title='.$title.'&amp;url='.$link;
+	$img     = $img_prefix.'delicious.png';
+	$tooltip = 'Bookmark this on Delicious';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://delicious.com/save?title='.$title.'&amp;url='.$link.'">';
-	$code .= '<img src="'.$img_prefix.'delicious.png" alt="Bookmark this on Delicious" title="Bookmark this on Delicious" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_dotnetkicks($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://www.dotnetkicks.com/kick/?title='.$title.'&amp;url='.$link;
+	$img     = $img_prefix.'dotnetkicks.png';
+	$tooltip = 'Kick It on DotNetKicks.com';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://www.dotnetkicks.com/kick/?title='.$title.'&amp;url='.$link.'">';
-	$code .= '<img src="'.$img_prefix.'dotnetkicks.png" alt="Kick It on DotNetKicks.com" title="Kick It on DotNetKicks.com" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_linkedin($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.$link.'&amp;title='.$title.'&amp;summary=&amp;source=';
+	$img     = $img_prefix.'linkedin.png';
+	$tooltip = 'Share on LinkedIn';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url='.$link.'&amp;title='.$title.'&amp;summary=&amp;source=">';
-	$code .= '<img src="'.$img_prefix.'linkedin.png" alt="Share on LinkedIn" title="Share on LinkedIn" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_technorati($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://www.technorati.com/faves?add='.$link;
+	$img     = $img_prefix.'technorati.png';
+	$tooltip = 'Bookmark this on Technorati';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://www.technorati.com/faves?add='.$link.'">';
-	$code .= '<img src="'.$img_prefix.'technorati.png" alt="Bookmark this on Technorati" title="Bookmark this on Technorati" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
 function code_twitter($title, $link, $img_prefix)
 {
-	$code = '';
+	$href    = 'http://twitter.com/home?status='.urlencode('Reading '.urldecode($link));
+	$img     = $img_prefix.'twitter.png';
+	$tooltip = 'Post on Twitter';
 
-	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="http://twitter.com/home?status='.urlencode('Reading '.urldecode($link)).'">';
-	$code .= '<img src="'.$img_prefix.'twitter.png" alt="Post on Twitter" title="Post on Twitter" />';
-	$code .= '</a>';
-	$code .= '</div>';
-
-	return $code;
+	return code_helper($href, $img, $tooltip);
 }
 
-//insert lightsocial custom html
+// insert Light Social custom html
 function lightsocial_insert($content)
 {
 	global $wp_query;
-	$post = $wp_query->post; //get post content
-	$id = $post->ID; //get post id
-	$postlink = get_permalink($id); //get post link
+
+	$post = $wp_query->post; // get post content
+	$id = $post->ID; // get post id
+	$postlink = get_permalink($id); // get post link
 	$title = trim(urlencode($post->post_title)); // get post title
-	$link = split('#', $postlink); //split the link with '#', for comment
-	$link = urlencode($link[0]);
+	$link = split('#', $postlink); // split the link with '#', for comment
+	$link = urlencode($link[0]); // get the actual link from array
 	$img_prefix = get_bloginfo('wpurl') . '/wp-content/plugins/light-social/';
 
 	$code = '';
@@ -195,37 +170,37 @@ function lightsocial_insert($content)
 	{
 		$code .= '<div class="lightsocial_container">';
 
-		//digg
+		// digg
 		$code .= code_digg($title, $link, $img_prefix);
 
-		//reddit
+		// reddit
 		$code .= code_reddit($title, $link, $img_prefix);
 		
-		//stumbleupon
+		// stumbleupon
 		$code .= code_stumbleupon($title, $link, $img_prefix);
 
-		//yahoo buzz
+		// yahoo buzz
 		$code .= code_yahoo_buzz($title, $link, $img_prefix);
 
-		//dzone
+		// dzone
 		$code .= code_dzone($title, $link, $img_prefix);
 
-		//facebook
+		// facebook
 		$code .= code_facebook($title, $link, $img_prefix);
 
-		//facebook
+		// delicious
 		$code .= code_delicious($title, $link, $img_prefix);
 
-		//dotnetkicks
+		// dotnetkicks
 		$code .= code_dotnetkicks($title, $link, $img_prefix);
 
-		//linkedin
+		// linkedin
 		$code .= code_linkedin($title, $link, $img_prefix);
 
-		//technorati
+		// technorati
 		$code .= code_technorati($title, $link, $img_prefix);
 
-		//twitter
+		// twitter
 		$code .= code_twitter($title, $link, $img_prefix);
 
 		$code .= '</div>';
@@ -234,5 +209,29 @@ function lightsocial_insert($content)
 	return $content . $code;
 }
 
+// change the Light Social custom html for proper render of feed in readers
+function lightsocial_insert_feed($content)
+{
+	// this pattern replace the element <div> with the inner <a>
+	$pattern = '/<div class="lightsocial_element"><a href=(.*?)<\/a><\/div>/i';
+	$replacement = '<a href=${1}</a>&nbsp;&nbsp;';
+
+	$new_content = preg_replace($pattern, $replacement, $content);
+
+	if (preg_last_error() != PREG_NO_ERROR) // error in preg, probably a backtrack limit error
+	{
+		// restore the content
+		$new_content = $content;
+	}
+
+	return $new_content;
+}
+
+// head
 add_action('wp_head', 'lightsocial_stylesheet');
+
+// content
 add_filter('the_content', 'lightsocial_insert');
+
+// content feed
+add_filter('the_content_feed', 'lightsocial_insert_feed');

@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: aldenml
-Tags: bookmark, bookmarking, bookmarks, digg, reddit, yahoo buzz, dzone, facebook, delicious, dotnetkicks, linkedin, technorati, twitter
-Requires at least: 2.8.6
+Tags: bookmark, bookmarking, bookmarks, digg, reddit, stumbleupon, yahoo buzz, dzone, facebook, delicious, dotnetkicks, linkedin, technorati, twitter
+Requires at least: 2.9
 Tested up to: 2.9
-Stable tag: 1.2
+Stable tag: 1.3
 
 This is a super lightweight plugin to insert a set of social share links at the bottom of each post, focused on technical blogs.
 
@@ -29,7 +29,9 @@ This is the list of used social sites:
 
 The plugin is implemented using the most simplistic html code to ensure fast load and minimal impact on your blog.
 
-For more customizations see: [Light Social WordPress plugin](http://www.aldentorres.com/lightsocial-wordpress-plugin/ "Light Social WordPress plugin home")
+Works with IE6 and HTML feed (atom, rss) readers.
+
+For more customizations see: [Light Social WordPress plugin](http://www.aldentorres.com/light-social-wordpress-plugin/ "Light Social WordPress plugin home")
 
 == Installation ==
 
@@ -46,7 +48,16 @@ No, simply activate or deactivate the plugin.
 
 == Screenshots ==
 
+1. This is how the plugin looks in your blog.
+2. This is how the plugin looks in Google Reader.
+
 == Changelog ==
+
+= 1.3 =
+* Code refactor for better readability.
+* Fix to work with HTML feed (atom, rss) readers.
+* Updated plugin homepage url.
+* Fix in Delicious icon.
 
 = 1.2 =
 * Added StumbleUpon social site.
