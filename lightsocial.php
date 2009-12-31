@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://www.aldentorres.com/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.3
+Version: 1.4
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -122,6 +122,15 @@ function code_dotnetkicks($title, $link, $img_prefix)
 	return code_helper($href, $img, $tooltip);
 }
 
+function code_dotnetshoutout($title, $link, $img_prefix)
+{
+	$href    = 'http://dotnetshoutout.com/Submit?title='.$title.'&amp;url='.$link;
+	$img     = $img_prefix.'dotnetshoutout.png';
+	$tooltip = 'Shout it';
+
+	return code_helper($href, $img, $tooltip);
+}
+
 function code_linkedin($title, $link, $img_prefix)
 {
 	$href    = 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.$link.'&amp;title='.$title.'&amp;summary=&amp;source=';
@@ -193,6 +202,9 @@ function lightsocial_insert($content)
 
 		// dotnetkicks
 		$code .= code_dotnetkicks($title, $link, $img_prefix);
+		
+		// dotnetshoutout
+		$code .= code_dotnetshoutout($title, $link, $img_prefix);
 
 		// linkedin
 		$code .= code_linkedin($title, $link, $img_prefix);
