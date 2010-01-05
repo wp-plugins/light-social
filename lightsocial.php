@@ -173,6 +173,7 @@ function lightsocial_insert($content)
 
 	$code = '';
 
+	//$display = is_home() || is_single(); // use this line for display on home and single posts only
 	$display = true; // if you want to put some special condition
 
 	if ($display)
@@ -218,7 +219,8 @@ function lightsocial_insert($content)
 		$code .= '</div>';
 	}
 
-	return $content . $code;
+	//return $code . $content; // use this line if you want the links before content
+	return $content . $code; // use this line if you want the links after content
 }
 
 // change the Light Social custom html for proper render of feed in readers
