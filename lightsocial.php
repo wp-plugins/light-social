@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://www.aldentorres.com/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.4
+Version: 1.6
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -104,6 +104,15 @@ function code_facebook($title, $link, $img_prefix)
 	return code_helper($href, $img, $tooltip);
 }
 
+function code_viadeo($title, $link, $img_prefix)
+{
+        $href    = 'http://www.viadeo.com/shareit/share/?url='.$link.'&amp;title='.$title.'&amp;encoding=UTF-8';
+        $img     = $img_prefix.'viadeo.png';
+        $tooltip = 'Share it on Viadeo';
+
+        return code_helper($href, $img, $tooltip);
+}
+
 function code_delicious($title, $link, $img_prefix)
 {
 	$href    = 'http://delicious.com/save?title='.$title.'&amp;url='.$link;
@@ -197,6 +206,9 @@ function lightsocial_insert($content)
 
 		// facebook
 		$code .= code_facebook($title, $link, $img_prefix);
+
+		// viadeo
+		//$code .= code_viadeo($title, $link, $img_prefix);
 
 		// delicious
 		$code .= code_delicious($title, $link, $img_prefix);

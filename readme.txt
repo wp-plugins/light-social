@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: aldenml
-Tags: bookmark, bookmarking, bookmarks, rss, digg, reddit, stumbleupon, yahoo buzz, dzone, facebook, delicious, dotnetkicks, dotnetshoutout, linkedin, technorati, twitter
+Tags: bookmark, bookmarking, bookmarks, rss, digg, reddit, stumbleupon, yahoo buzz, dzone, facebook, viadeo, delicious, dotnetkicks, dotnetshoutout, linkedin, technorati, twitter
 Requires at least: 2.9
 Tested up to: 2.9.1
-Stable tag: 1.5
+Stable tag: 1.6
 
 This is a super lightweight plugin to insert a set of social share links at the bottom of each post, focused on technical blogs.
 
@@ -21,6 +21,7 @@ This is the list of used social sites:
 *   Yahoo Buzz
 *   DZone
 *   Facebook
+*   Viadeo
 *   Delicious
 *   DotNetKicks
 *   DotNetShoutout
@@ -53,6 +54,9 @@ No, simply activate or deactivate the plugin.
 2. This is how the plugin looks in Google Reader.
 
 == Changelog ==
+
+= 1.6 =
+* Added Viadeo social site (commented by default).
 
 = 1.5 =
 * Handles selective placement and position of the links.
