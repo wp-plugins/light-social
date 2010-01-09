@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://www.aldentorres.com/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.6
+Version: 1.7
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -244,11 +244,17 @@ function lightsocial_insert_feed($content)
 
 	$new_content = preg_replace($pattern, $replacement, $content);
 
-	if (preg_last_error() != PREG_NO_ERROR) // error in preg, probably a backtrack limit error
+	if (function_exists('preg_last_error')) // PHP >= 5.2.0
 	{
-		// restore the content
-		$new_content = $content;
+		if (preg_last_error() != PREG_NO_ERROR) // error in preg, probably a backtrack limit error
+		{
+			// restore the content
+			$new_content = $content;
+		}
 	}
+	
+	// IMPORTAN NOTE: If your PHP < 5.2.0 you will not see any preg error.
+	// For long, very long post, you can get a backtrack limit error.
 
 	return $new_content;
 }
