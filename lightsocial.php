@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://www.aldentorres.com/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.7
+Version: 1.8
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -22,6 +22,16 @@ Author URI: http://www.aldentorres.com/
     You should have received a copy of the GNU General Public License
     along with this program; if not, see <http://www.gnu.org/licenses/>.
 */
+
+/**
+ * Runs after WordPress admin has finished loading but before any headers are sent.
+ * Useful for intercepting $_GET or $_POST triggers. 
+ */
+function lightsocial_init()
+{
+	// Loads the plugin's translated strings. 
+	load_plugin_textdomain('light_social', false, dirname(plugin_basename(__FILE__)));
+}
 
 // add Light Social custom style
 function lightsocial_stylesheet()
@@ -54,7 +64,7 @@ function code_digg($title, $link, $img_prefix)
 {
 	$href    = 'http://digg.com/submit?url='.$link.'&amp;title='.$title;
 	$img     = $img_prefix.'digg.png';
-	$tooltip = 'Digg This';
+	$tooltip = __('Digg This', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -63,7 +73,7 @@ function code_reddit($title, $link, $img_prefix)
 {
 	$href    = 'http://www.reddit.com/submit?url='.$link.'&amp;title='.$title;
 	$img     = $img_prefix.'reddit.png';
-	$tooltip = 'Reddit This';
+	$tooltip = __('Reddit This', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -72,7 +82,7 @@ function code_stumbleupon($title, $link, $img_prefix)
 {
 	$href    = 'http://www.stumbleupon.com/submit?url='.$link.'&amp;title='.$title;
 	$img     = $img_prefix.'stumbleupon.png';
-	$tooltip = 'Stumble Now!';
+	$tooltip = __('Stumble Now!', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -81,7 +91,7 @@ function code_yahoo_buzz($title, $link, $img_prefix)
 {
 	$href    = 'http://buzz.yahoo.com/buzz?targetUrl='.$link.'&amp;headline='.$title;
 	$img     = $img_prefix.'yahoo_buzz.png';
-	$tooltip = 'Buzz This';
+	$tooltip = __('Buzz This', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -90,7 +100,7 @@ function code_dzone($title, $link, $img_prefix)
 {
 	$href    = 'http://www.dzone.com/links/add.html?title='.$title.'&amp;url='.$link;
 	$img     = $img_prefix.'dzone.png';
-	$tooltip = 'Vote on DZone';
+	$tooltip = __('Vote on DZone', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -99,7 +109,7 @@ function code_facebook($title, $link, $img_prefix)
 {
 	$href    = 'http://www.facebook.com/sharer.php?t='.$title.'&amp;u='.$link;
 	$img     = $img_prefix.'facebook.png';
-	$tooltip = 'Share on Facebook';
+	$tooltip = __('Share on Facebook', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -108,7 +118,7 @@ function code_viadeo($title, $link, $img_prefix)
 {
         $href    = 'http://www.viadeo.com/shareit/share/?url='.$link.'&amp;title='.$title.'&amp;encoding=UTF-8';
         $img     = $img_prefix.'viadeo.png';
-        $tooltip = 'Share it on Viadeo';
+        $tooltip = __('Share it on Viadeo', 'light_social');
 
         return code_helper($href, $img, $tooltip);
 }
@@ -117,7 +127,7 @@ function code_delicious($title, $link, $img_prefix)
 {
 	$href    = 'http://delicious.com/save?title='.$title.'&amp;url='.$link;
 	$img     = $img_prefix.'delicious.png';
-	$tooltip = 'Bookmark this on Delicious';
+	$tooltip = __('Bookmark this on Delicious', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -126,7 +136,7 @@ function code_dotnetkicks($title, $link, $img_prefix)
 {
 	$href    = 'http://www.dotnetkicks.com/kick/?title='.$title.'&amp;url='.$link;
 	$img     = $img_prefix.'dotnetkicks.png';
-	$tooltip = 'Kick It on DotNetKicks.com';
+	$tooltip = __('Kick It on DotNetKicks.com', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -135,7 +145,7 @@ function code_dotnetshoutout($title, $link, $img_prefix)
 {
 	$href    = 'http://dotnetshoutout.com/Submit?title='.$title.'&amp;url='.$link;
 	$img     = $img_prefix.'dotnetshoutout.png';
-	$tooltip = 'Shout it';
+	$tooltip = __('Shout it', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -144,7 +154,7 @@ function code_linkedin($title, $link, $img_prefix)
 {
 	$href    = 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.$link.'&amp;title='.$title.'&amp;summary=&amp;source=';
 	$img     = $img_prefix.'linkedin.png';
-	$tooltip = 'Share on LinkedIn';
+	$tooltip = __('Share on LinkedIn', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -153,7 +163,7 @@ function code_technorati($title, $link, $img_prefix)
 {
 	$href    = 'http://www.technorati.com/faves?add='.$link;
 	$img     = $img_prefix.'technorati.png';
-	$tooltip = 'Bookmark this on Technorati';
+	$tooltip = __('Bookmark this on Technorati', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -162,7 +172,7 @@ function code_twitter($title, $link, $img_prefix)
 {
 	$href    = 'http://twitter.com/home?status='.urlencode('Reading '.urldecode($link));
 	$img     = $img_prefix.'twitter.png';
-	$tooltip = 'Post on Twitter';
+	$tooltip = __('Post on Twitter', 'light_social');
 
 	return code_helper($href, $img, $tooltip);
 }
@@ -253,11 +263,14 @@ function lightsocial_insert_feed($content)
 		}
 	}
 	
-	// IMPORTAN NOTE: If your PHP < 5.2.0 you will not see any preg error.
+	// VERY IMPORTANT: If your PHP < 5.2.0 you will not see any preg error.
 	// For long, very long post, you can get a backtrack limit error.
 
 	return $new_content;
 }
+
+// init
+add_action('init', 'lightsocial_init');
 
 // head
 add_action('wp_head', 'lightsocial_stylesheet');
