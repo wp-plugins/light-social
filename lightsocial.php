@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://www.aldentorres.com/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.9
+Version: 1.10
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -52,8 +52,8 @@ function code_helper($href, $img, $tooltip)
 	$code = '';
 
 	$code .= '<div class="lightsocial_element">';
-	$code .= '<a href="'.$href.'">';
-	$code .= '<img src="'.$img.'" alt="'.$tooltip.'" title="'.$tooltip.'" />';
+	$code .= '<a class="lightsocial_a" href="'.$href.'">';
+	$code .= '<img class="lightsocial_img" src="'.$img.'" alt="'.$tooltip.'" title="'.$tooltip.'" />';
 	$code .= '</a>';
 	$code .= '</div>';
 
