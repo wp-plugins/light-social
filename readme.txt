@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: aldenml
-Tags: bookmark, bookmarking, bookmarks, rss, feed, favorite, buttons, faves, digg, reddit, stumbleupon, yahoo buzz, dzone, facebook, viadeo, delicious, dotnetkicks, dotnetshoutout, linkedin, technorati, twitter, page, links
+Tags: bookmark, bookmarking, bookmarks, rss, feed, favorite, buttons, faves, digg, reddit, stumbleupon, yahoo buzz, dzone, facebook, viadeo, delicious, dotnetkicks, dotnetshoutout, linkedin, technorati, twitter, page, links, misterwong, mister wong
 Requires at least: 2.9
 Tested up to: 2.9.1
-Stable tag: 1.10
+Stable tag: 1.11
 
 This is a super lightweight plugin to insert a set of social share links at the bottom of each post, focused on technical blogs.
 
@@ -29,6 +29,7 @@ This is the list of used social sites:
 *   Technorati
 *   Twitter
 *   Faves
+*   Mister Wong
 
 The plugin is implemented using the most simplistic html code to ensure fast load and minimal impact on your blog.
 
@@ -55,6 +56,10 @@ No, simply activate or deactivate the plugin.
 2. This is how the plugin looks in Google Reader.
 
 == Changelog ==
+
+= 1.11 =
+* Added Mister Wong social site (commented by default).
+* Added line for single post only placement.
 
 = 1.10 =
 * Added lightsocial_a and lightsocial_img style class elements. This fix some style related issues.

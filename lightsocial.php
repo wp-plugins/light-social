@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://www.aldentorres.com/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.10
+Version: 1.11
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -179,11 +179,20 @@ function code_twitter($title, $link, $img_prefix)
 
 function code_faves($title, $link, $img_prefix)
 {
-        $href    = 'http://faves.com/Authoring.aspx?u='.$link.'&amp;t='.$title;
-        $img     = $img_prefix.'faves.png';
-        $tooltip = __('Fave It!', 'light_social');
+	$href    = 'http://faves.com/Authoring.aspx?u='.$link.'&amp;t='.$title;
+	$img     = $img_prefix.'faves.png';
+	$tooltip = __('Fave It!', 'light_social');
 
-        return code_helper($href, $img, $tooltip);
+	return code_helper($href, $img, $tooltip);
+}
+
+function code_misterwong($title, $link, $img_prefix)
+{
+	$href    = 'http://www.mister-wong.com/index.php?action=addurl&amp;bm_url='.$link.'&amp;bm_description='.$title;
+	$img     = $img_prefix.'misterwong.png';
+	$tooltip = __('Bookmark this on Mister Wong', 'light_social');
+
+	return code_helper($href, $img, $tooltip);
 }
 
 // insert Light Social custom html
@@ -202,6 +211,7 @@ function lightsocial_insert($content)
 	$code = '';
 
 	//$display = is_home() || is_single(); // use this line for display on home and single posts only
+	//$display = is_single(); // use this line for display on single posts only
 	$display = true; // if you want to put some special condition
 
 	if ($display)
@@ -249,6 +259,9 @@ function lightsocial_insert($content)
 		
 		// faves
 		//$code .= code_faves($title, $link, $img_prefix);
+		
+		// misterwong
+		//$code .= code_misterwong($title, $link, $img_prefix);
 
 		$code .= '</div>';
 	}
