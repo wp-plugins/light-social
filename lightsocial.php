@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://www.aldentorres.com/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 1.11
+Version: 1.12
 Author URI: http://www.aldentorres.com/
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -274,8 +274,8 @@ function lightsocial_insert($content)
 function lightsocial_insert_feed($content)
 {
 	// this pattern replace the element <div> with the inner <a>
-	$pattern = '/<div class="lightsocial_element"><a href=(.*?)<\/a><\/div>/i';
-	$replacement = '<a href=${1}</a>&nbsp;&nbsp;';
+	$pattern = '/<div class="lightsocial_element"><a class="lightsocial_a" href=(.*?)<\/a><\/div>/i';
+	$replacement = '<a class="lightsocial_a" href=${1}</a>&nbsp;&nbsp;';
 
 	$new_content = preg_replace($pattern, $replacement, $content);
 
