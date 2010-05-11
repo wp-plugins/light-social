@@ -177,9 +177,9 @@ function code_twitter($title, $link, $img_prefix)
 	return code_helper($href, $img, $tooltip);
 }
 
-function code_google_reader($title, $link, $img_prefix)
+function code_google_buzz($title, $link, $img_prefix)
 {
-	$href    = 'http://www.google.com/reader/link?url='.$link.'&amp;title='.$title;
+	$href    = 'http://www.google.com/buzz/post?url='.$link;
 	$img     = $img_prefix.'google_buzz.png';
 	$tooltip = __('Google Buzz (aka. Google Reader)', 'light_social');
 
@@ -266,8 +266,8 @@ function lightsocial_insert($content)
 		// twitter
 		$code .= code_twitter($title, $link, $img_prefix);
 		
-		// google reader
-		$code .= code_google_reader($title, $link, $img_prefix);
+		// google buzz
+		$code .= code_google_buzz($title, $link, $img_prefix);
 		
 		// faves
 		//$code .= code_faves($title, $link, $img_prefix);
