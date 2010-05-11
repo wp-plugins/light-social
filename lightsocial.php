@@ -5,7 +5,7 @@ Plugin URI: http://aldenml.com/blog/2009/12/20/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
 Version: 2.0
-Author URI: http://aldenml.com/
+Author URI: http://aldenml.com/blog
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
 

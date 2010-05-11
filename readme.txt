@@ -2,8 +2,8 @@
 Contributors: aldenml
 Tags: bookmark, bookmarking, bookmarks, rss, feed, favorite, buttons, faves, digg, reddit, stumbleupon, yahoo buzz, dzone, facebook, viadeo, delicious, dotnetkicks, dotnetshoutout, linkedin, technorati, twitter, page, links, misterwong, mister wong, buzz, google buzz, google reader
 Requires at least: 2.9
-Tested up to: 2.9.1
-Stable tag: 1.13
+Tested up to: 2.9.2
+Stable tag: 2.0
 
 This is a super lightweight plugin to insert a set of social share links at the bottom of each post, focused on technical blogs.
 
@@ -11,7 +11,7 @@ This is a super lightweight plugin to insert a set of social share links at the 
 
 This is a super lightweight plugin to insert a set of social share links at the bottom of each post, focused on technical blogs.
 
-With this plugin you don't have options to configure. Simply activate or deactivate to show or not the bookmark social links.
+With this plugin you have simple options to configure. Simply enable or disable to show or not the bookmark social links.
 
 This is the list of used social sites:
 
@@ -28,15 +28,15 @@ This is the list of used social sites:
 *   LinkedIn
 *   Technorati
 *   Twitter
-*   Google Buzz (aka. Google Reader)
+*   Google Buzz
 *   Faves
 *   Mister Wong
 
 The plugin is implemented using the most simplistic html code to ensure fast load and minimal impact on your blog.
 
-Works with IE6 and HTML feed (atom, rss) readers. Handles selective placement and position of the links.
+Works with IE6 and HTML feed (atom, rss) readers. Handles selective placement and position of the links (working in better support for this).
 
-For more customizations see: [Light Social WordPress plugin](http://www.aldentorres.com/light-social-wordpress-plugin/ "Light Social WordPress plugin home")
+For more customizations see: [Light Social WordPress plugin](http://aldenml.com/blog/2009/12/20/light-social-wordpress-plugin/ "Light Social WordPress plugin home")
 
 == Installation ==
 
@@ -49,7 +49,7 @@ For more customizations see: [Light Social WordPress plugin](http://www.aldentor
 
 = Do I have to configure something? =
 
-No, simply activate or deactivate the plugin.
+No, simply enable or disable the plugin.
 
 == Screenshots ==
 
@@ -57,6 +57,15 @@ No, simply activate or deactivate the plugin.
 2. This is how the plugin looks in Google Reader.
 
 == Changelog ==
+
+= 2.0 =
+* Major refactor towards better design.
+* Preparing code base to support multiples user's requests.
+* Code moved to PHP "class".
+* Created admin page with enabled option.
+* Full support for Google Buzz.
+* Minor changes in CSS.
+* Testing with WP 3.0 beta.
 
 = 1.13 =
 * Added Google Buzz (aka. Google Reader) support.
