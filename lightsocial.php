@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://aldenml.com/blog/2009/12/20/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 2.0
+Version: 2.1
 Author URI: http://aldenml.com/blog
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -31,7 +31,7 @@ class LightSocial
   // Private variables
   //*************************
 
-  var $version          = '2.0';      // Plugin version
+  var $version          = '2.1';      // Plugin version
   var $settings         = array();    // Contains the user's settings
   var $defaultsettings  = array();    // Contains the default settings
 
@@ -47,7 +47,8 @@ class LightSocial
 
     // Create array of default settings
     $this->defaultsettings = array(
-				   'enabled'        => 1,
+				   'enabled'         => 1,
+                   'position'        => 'after_content',
 				   );
 
     // Create the settings array by merging the user's settings and the defaults
@@ -112,7 +113,8 @@ class LightSocial
   // Validate the settings sent from the settings page
   function validate_settings($settings)
   {
-    $settings['enabled'] = (!empty($settings['enabled'])) ? 1 : 0;
+    $settings['enabled' ]  = (!empty($settings['enabled' ])) ? 1 : 0;
+    $settings['position']  = (!empty($settings['position'])) ? strtolower($settings['position']) : $this->defaultsettings['position'];
 
     return $settings;
   }
@@ -132,8 +134,23 @@ class LightSocial
         <table class="form-table">
             <tr valign="top">
                 <th scope="row"><?php _e('Enabled', 'lightsocial'); ?></th>
-		<td><input type="checkbox" name="lightsocial_settings[enabled]" <?php checked($this->settings['enabled'], 1); ?> /></td>
+                <td><input type="checkbox" name="lightsocial_settings[enabled]" <?php checked($this->settings['enabled'], 1); ?> /></td>
             </tr>
+
+            <tr valign="top">
+                <th scope="row"><?php _e('Position', 'lightsocial'); ?></th>
+                <td>
+                    <select name="lightsocial_settings[position]">
+                        <option value="after_content" <?php selected($this->settings['position'], 'after_content'); ?>>
+                            After Content
+                        </option>
+                        <option value="before_content" <?php selected($this->settings['position'], 'before_content'); ?>>
+                            Before Content
+                        </option>
+                    </select>
+                </td>
+            </tr>
+
         </table>
 
         <p class="submit">
@@ -380,10 +397,23 @@ class LightSocial
       //$code .= $this->code_misterwong($title, $link, $img_prefix);
 
       $code .= '</div>';
-    }
 
-    //return $code . $content; // use this line if you want the links before content
-    return $content . $code; // use this line if you want the links after content
+
+      // ready to place the code in the content
+      switch ($this->settings['position'])
+      {
+        case 'after_content':
+          return $content . $code;
+        case 'before_content':
+          return $code . $content;
+        default:
+          return $content; // only for safe
+      }
+    }
+    else
+    {
+      return $content;
+    }
   }
 
   // add Light Social custom style
