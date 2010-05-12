@@ -429,7 +429,7 @@ class LightSocial
 //***********************************************
 
 // Start this plugin once all other plugins are fully loaded
-add_action('init', 'LightSocial', 5);
+add_action('init', 'LightSocial');
 
 function LightSocial() {
   global $LightSocial;
