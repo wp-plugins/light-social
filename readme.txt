@@ -3,7 +3,7 @@ Contributors: aldenml
 Tags: bookmark, bookmarking, bookmarks, rss, feed, favorite, buttons, faves, digg, reddit, stumbleupon, yahoo buzz, dzone, facebook, viadeo, delicious, dotnetkicks, dotnetshoutout, linkedin, technorati, twitter, page, links, misterwong, mister wong, buzz, google buzz, google reader
 Requires at least: 2.9
 Tested up to: 2.9.2
-Stable tag: 2.1
+Stable tag: 2.2
 
 This is a super lightweight plugin to insert a set of social share links at the bottom of each post, focused on technical blogs.
 
@@ -57,6 +57,10 @@ No, simply enable or disable the plugin.
 2. This is how the plugin looks in Google Reader.
 
 == Changelog ==
+
+= 2.2 =
+* Added PHP4 style class constructor.
+* Added open in new window option (using target="_blank" or javascript).
 
 = 2.1 =
 * Reverted normal plugin init order.
