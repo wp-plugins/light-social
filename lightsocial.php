@@ -4,7 +4,7 @@ Plugin Name: Light Social
 Plugin URI: http://aldenml.com/blog/2009/12/20/light-social-wordpress-plugin/
 Description: Insert a set of social share links at the bottom of each post.
 Author: Alden Torres
-Version: 2.1
+Version: 2.2
 Author URI: http://aldenml.com/blog
 */
 /*  Copyright 2009  Alden Torres  (email : aldenml@yahoo.com)
@@ -31,13 +31,19 @@ class LightSocial
   // Private variables
   //*************************
 
-  var $version          = '2.1';      // Plugin version
+  var $version          = '2.2';      // Plugin version
   var $settings         = array();    // Contains the user's settings
   var $defaultsettings  = array();    // Contains the default settings
 
   //*******************************************
   // Constructor (kind of module init routine)
   //*******************************************
+
+  // PHP4 constructor
+  function LightSocial()
+  {
+    $this->__construct();
+  }
 
   // Initalize the plugin by registering the hooks
   function __construct()
@@ -47,8 +53,9 @@ class LightSocial
 
     // Create array of default settings
     $this->defaultsettings = array(
-				   'enabled'         => 1,
-                   'position'        => 'after_content',
+                   'enabled'         => 1, // 0, 1
+                   'position'        => 'after_content', //after_content, before_content
+                   'newwindow'       => 'no' // blank, javascript
 				   );
 
     // Create the settings array by merging the user's settings and the defaults
@@ -113,8 +120,9 @@ class LightSocial
   // Validate the settings sent from the settings page
   function validate_settings($settings)
   {
-    $settings['enabled' ]  = (!empty($settings['enabled' ])) ? 1 : 0;
-    $settings['position']  = (!empty($settings['position'])) ? strtolower($settings['position']) : $this->defaultsettings['position'];
+    $settings['enabled'  ] = (!empty($settings['enabled'  ])) ? 1 : 0;
+    $settings['position' ] = (!empty($settings['position' ])) ? strtolower($settings['position' ]) : $this->defaultsettings['position' ];
+    $settings['newwindow'] = (!empty($settings['newwindow'])) ? strtolower($settings['newwindow']) : $this->defaultsettings['newwindow'];
 
     return $settings;
   }
@@ -151,6 +159,23 @@ class LightSocial
                 </td>
             </tr>
 
+            <tr valign="top">
+                <th scope="row"><?php _e('Show in new window?', 'lightsocial'); ?></th>
+                <td>
+                    <select name="lightsocial_settings[newwindow]">
+                        <option value="no" <?php selected($this->settings['newwindow'], 'no'); ?>>
+                            No
+                        </option>
+                        <option value="blank" <?php selected($this->settings['newwindow'], 'blank'); ?>>
+                            Using target=&quot;_blank&quot;
+                        </option>
+                        <option value="javascript" <?php selected($this->settings['newwindow'], 'javascript'); ?>>
+                            Using javascript
+                        </option>
+                    </select>
+                </td>
+            </tr>
+
         </table>
 
         <p class="submit">
@@ -170,11 +195,28 @@ class LightSocial
   // this is a helper function to refactor common code
   function code_helper($href, $img, $tooltip)
   {
+    $newwindow_code = '';
+
+    switch ($this->settings['newwindow'])
+    {
+      case 'no':
+        $newwindow_code = '';
+        break;
+      case 'blank':
+        $newwindow_code = 'target="_blank"';
+        break;
+      case 'javascript':
+        $newwindow_code = 'onclick="window.open(this.href);return false;"';
+        break;
+      default:
+        $newwindow_code = '';
+    }
+
     $code = '';
 
     $code .= '<div class="lightsocial_element">';
-    $code .= '<a class="lightsocial_a" href="'.$href.'">';
-    $code .= '<img class="lightsocial_img" src="'.$img.'" alt="'.$tooltip.'" title="'.$tooltip.'" />';
+    $code .= '<a class="lightsocial_a" href="' . $href . '" ' . $newwindow_code . '>';
+    $code .= '<img class="lightsocial_img" src="' . $img . '" alt="' . $tooltip . '" title="' . $tooltip . '" />';
     $code .= '</a>';
     $code .= '</div>';
 
@@ -442,8 +484,8 @@ class LightSocial
     {
       if (preg_last_error() != PREG_NO_ERROR) // error in preg, probably a backtrack limit error
       {
-	// restore the content
-	$new_content = $content;
+        // restore the content
+        $new_content = $content;
       }
     }
 
@@ -462,7 +504,7 @@ class LightSocial
 add_action('init', 'LightSocial');
 
 function LightSocial() {
-  global $LightSocial;
+  global $lightSocial;
 
-  $LightSocial = new LightSocial();
+  $lightSocial = new LightSocial();
 }
